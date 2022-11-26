@@ -36,6 +36,6 @@ class UpdateCategoryRequest extends FormRequest
             'name.max' => 'Solo se permite 50 caracateres',
             'description.string' => 'El valor no es correcto',
             'description.max' => 'Solo se permite 255 caracateres',
-        ]
+        ];
     }
 }

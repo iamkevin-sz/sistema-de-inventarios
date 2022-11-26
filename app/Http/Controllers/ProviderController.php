@@ -25,7 +25,8 @@ class ProviderController extends Controller
     public function store(StoreProviderRequest $request)
     {
         Provider::create($request->all());
-        return redirect()->route('providers.index');
+        return redirect()->route('admin.providers.index');
+        // return $request;
 
     }
 
@@ -46,13 +47,14 @@ class ProviderController extends Controller
     public function update(UpdateProviderRequest $request, Provider $provider)
     {
         $provider->update($request->all());
-        return redirect()->route('providers.index');
+        return redirect()->route('admin.providers.index');
+        // return $provider;
     }
 
 
     public function destroy(Provider $provider)
     {
         $provider->delete();
-        return redirect()->route('providers.index');
+        return redirect()->route('admin.providers.index');
     }
 }

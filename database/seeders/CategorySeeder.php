@@ -7,6 +7,9 @@ use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
+
+
+
     /**
      * Run the database seeds.
      *
@@ -14,6 +17,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Category::factory(150)->create();
     }
 }

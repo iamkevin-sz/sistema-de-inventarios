@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+
+            $table->string('name')->unique();;
             $table->string('description')->nullable();  // nullable se usa cuando el campo no es requerido
+
             $table->timestamps();
         });
     }

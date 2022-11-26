@@ -25,10 +25,10 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'string|required|unique:products|max:255',
-            'image' => 'required|dimensions:min_width=100,min_height=200',
+            // 'image' => 'required|dimensions:min_width=100,min_height=200',
             'sell_price' => 'required|',
-            'category_id' => 'integer|required|exists:App\Models\Category,id',
-            'provider_id' => 'integer|required|exists:App\Models\Provider,id',
+            'category_id' => 'integer|required',
+            'provider_id' => 'integer|required',
         ];
     }
     public function messages(){
@@ -38,18 +38,18 @@ class StoreProductRequest extends FormRequest
             'name.unique' => 'El producto ya esta registrado',
             'name.max' => 'Solo se permite 255 caracateres',
 
-            'image.required' => 'El campo es requerido',
-            'image.dimensions' => 'Solo se permite imagenes de 100 x 200px',
+            // 'image.required' => 'El campo es requerido',
+            // 'image.dimensions' => 'Solo se permite imagenes de 100 x 200px',
 
             'sell_price.required' => 'El campo es requerido',
 
             'category_id.integer' => 'El valor tiene que ser entero',
             'category_id.required' => 'El campo es requerido',
-            'category_id.exists' => 'La categoria no existe',
+            // 'category_id.exists' => 'La categoria no existe',
 
             'provider_id.integer' => 'El valor tiene que ser entero',
             'provider_id.required' => 'El campo es requerido',
-            'provider_id.exists' => 'El proveedor no existe',
+            // 'provider_id.exists' => 'El proveedor no existe',
         ];
     }
 }

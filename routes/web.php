@@ -1,7 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\admin\RoleController;
+use App\Http\Controllers\admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +21,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dash', function () {
+        return view('dash.index');
+    })->name('dash');
+});
+
+
+
+
+

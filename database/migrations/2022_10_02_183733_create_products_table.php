@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
 
-            $table->string('code')->unique();
+            $table->string('code')->unique()->nullable();
             $table->string('name')->unique();
-            $table->string('stock');
+            $table->string('stock')->default(0);
             $table->string('image');
             $table->decimal('sell_price', 12, 2);
             $table->enum('status',['ACTIVE', 'DEACTIVATED'])->default('ACTIVE');

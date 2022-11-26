@@ -12,6 +12,7 @@ use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
+
     public function index()
     {
         $products = Product::get();
@@ -30,8 +31,21 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        Product::create($request->all());
-        return redirect()->route('products.index');
+
+        if($request -> hasFile('picture')){
+            $file = $request -> file('picture');
+            $image_name = time().' _ '. $file -> getClientOriginalName();
+            $file -> move(public_path("/image"), $image_name);
+        }
+
+
+        $product = Product::create($request->all()+[
+            'image' => $image_name,
+        ]);
+
+        $product -> update(['code'=>$product->id]);
+
+        return redirect()->route('admin.products.index');
 
     }
 
@@ -53,14 +67,44 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->all());
-        return redirect()->route('products.index');
+
+
+        if($request -> hasFile('picture')){
+            $file = $request -> file('picture');
+            $image_name = time().' _ '. $file -> getClientOriginalName();
+            $file -> move(public_path("/image"), $image_name);
+        }
+
+
+
+
+
+
+        $product->update($request->all()+[
+            'image' => $image_name,
+        ]);
+        return redirect()->route('admin.products.index');
     }
 
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index');
+        return redirect()->route('admin.products.index');
+    }
+
+    public function cambiar_estado(Product $product)
+    {
+        if ($product->status == 'ACTIVE') {
+            $product ->update(['status'=>'DEACTIVATED']);
+            return redirect()->back();
+            // $purchase->update(['status'=>'CANCELED']);
+            // return redirect()->back()->with('toast_success', '¡Estado cambiado con éxito!');
+        } else {
+            $product ->update(['status'=>'ACTIVE']);
+            return redirect()->back();
+            // $purchase->update(['status'=>'VALID']);
+            // return redirect()->back()->with('toast_success', '¡Estado cambiado con éxito!');
+        }
     }
 }

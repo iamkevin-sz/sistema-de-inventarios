@@ -26,9 +26,9 @@ class UpdateProviderRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|string|unique:providers,email,'.$this->route('provider')->id.'|max:255',
-            'ruc_number' => 'required | string |min:11|unique:providers,ruc_number,'.$this->route('provider')->id.'|max:11', //unico quiere decir que no se puede repetir, por ejemplo no se puede repetir el number ruc
+            'ruc_number' => 'required | string |min:11|unique:providers,ruc_number,'.$this->route('provider')->id.'|max:110', //unico quiere decir que no se puede repetir, por ejemplo no se puede repetir el number ruc
             'address' => 'nullable | string | max:255 ',
-            'phone' => 'required | string |min:9|unique:providers,phone,'.$this->route('provider')->id.'|max:9',
+            'phone' => 'required | string |min:8|unique:providers,phone,'.$this->route('provider')->id.'|max:100',
         ];
     }
     public function messages(){
@@ -59,4 +59,5 @@ class UpdateProviderRequest extends FormRequest
             'phone.unique' => 'Este telefono ya existe',
         ];
 
+}
 }
